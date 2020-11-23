@@ -14,6 +14,9 @@ VIDEO_2
 	no hay nuevas ejecuciones
 	se sigue usando go run cmd/chat/charsrv.go -config ./config/config.yaml
 --------------------------------------
+VIDEO_3
+-------
+creacion DATABASE/db.go en INTERNAL
 */
 
 package main
@@ -24,15 +27,22 @@ import (
 	"os"
 
 	"github.com/CristianMarsico/TP-Go/internal/config"
+	"github.com/CristianMarsico/TP-Go/internal/database"
 	"github.com/CristianMarsico/TP-Go/internal/service/chat"
 )
 
 func main() {
 	cfg := readConfig()
 
+	db, err := database.NewDataBase(cfg)
+	if err != nil {
+		fmt.Println(err.Error())
+		os.Exit(1)
+	}
+
 	/*fmt.Println(cfg.DB.Driver)
 	fmt.Println(cfg.Version)*/
-	service, _ := chat.New(cfg)
+	service, _ := chat.New(db, cfg)
 	for _, m := range service.FindAll() {
 		fmt.Println(m)
 	}

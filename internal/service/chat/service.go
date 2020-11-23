@@ -7,7 +7,10 @@ creacion de la estructura, servicio privado
 */
 package chat
 
-import "github.com/CristianMarsico/TP-Go/internal/config"
+import (
+	"github.com/CristianMarsico/TP-Go/internal/config"
+	"github.com/jmoiron/sqlx"
+)
 
 // Message ...
 type Message struct {
@@ -22,12 +25,13 @@ type ChatService interface {
 	FindAll() []*Message
 }
 type service struct {
+	db   *sqlx.DB
 	conf *config.Config
 }
 
 // New ...
-func New(c *config.Config) (ChatService, error) {
-	return service{c}, nil //instancia de la estructura que respeta la interfaz
+func New(db *sqlx.DB, c *config.Config) (ChatService, error) {
+	return service{db, c}, nil //instancia de la estructura que respeta la interfaz
 }
 
 // AddMessage ...
@@ -44,7 +48,8 @@ func (s service) FindByID(ID int) *Message {
 // FindAll ...
 func (s service) FindAll() []*Message {
 	var list []*Message
-	list = append(list, &Message{0, "Hello World"})
+	//list = append(list, &Message{0, "Hello World"})
+	s.db.Select(&list, "SELECT * FROM messages") //lo aloja en lugar de memoria de list
 	return list
 
 }
