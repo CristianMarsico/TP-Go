@@ -18,8 +18,8 @@ type Message struct {
 	Text string
 }
 
-// ChatService ...
-type ChatService interface {
+// Service ...
+type Service interface {
 	AddMessage(Message) error
 	FindByID(int) *Message
 	FindAll() []*Message
@@ -30,7 +30,7 @@ type service struct {
 }
 
 // New ...
-func New(db *sqlx.DB, c *config.Config) (ChatService, error) {
+func New(db *sqlx.DB, c *config.Config) (Service, error) {
 	return service{db, c}, nil //instancia de la estructura que respeta la interfaz
 }
 
