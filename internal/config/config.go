@@ -1,8 +1,10 @@
 /*
-PASOS P/ INSTALACION DE DEPENDENCIAS
+VIDEO_1
+----------------------
+PASOS P/ INSTALACION DE DEPENDENCIAS (en carpeta TP-Go)
 	1) go mod init
 	2) go get gopkg.in/yaml.v3 (crea el go.mod)
-	3)seguido go mod tidy (crea el go.sum)
+	3) go mod tidy (crea el go.sum)
 */
 
 package config

@@ -1,4 +1,4 @@
-module github.com/CristianMarsico/TP-Go/internal/config
+module github.com/CristianMarsico/TP-Go
 
 go 1.15
 
